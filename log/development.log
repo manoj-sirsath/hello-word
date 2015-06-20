@@ -1,0 +1,1389 @@
+  [1m[36m (23.6ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (61.1ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to DeviseCreateUsers (20150615122658)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (85.0ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "email" character varying(255) DEFAULT '' NOT NULL, "encrypted_password" character varying(255) DEFAULT '' NOT NULL, "reset_password_token" character varying(255), "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (41.4ms)[0m  CREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")
+  [1m[36m (48.4ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150615122658"]]
+  [1m[36m (20.9ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-15 18:09:28 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/railties-4.0.0/lib/rails/templates/rails/welcome/index.html.erb (1.0ms)
+Completed 200 OK in 12ms (Views: 4.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-15 18:09:43 +0530
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (1.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (32.0ms)
+Completed 200 OK in 249ms (Views: 220.0ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-06-15 18:09:43 +0530
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-06-15 18:09:43 +0530
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-06-15 18:09:43 +0530
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-06-15 18:09:43 +0530
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-06-15 18:09:43 +0530
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2015-06-15 18:09:46 +0530
+Processing by Devise::RegistrationsController#new as HTML
+  Rendered devise/shared/_links.html.erb (0.3ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 7ms (Views: 6.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2015-06-15 18:09:53 +0530
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ur1XxWOdifnFNcBc0YQAkCkXDwuGq2EbCIOAV+i9O0Y=", "user"=>{"email"=>"manoj.sirsath@kanakaconsulting.in", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mUser Exists (0.8ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'manoj.sirsath@kanakaconsulting.in' LIMIT 1[0m
+  [1m[35mSQL (3.1ms)[0m  INSERT INTO "users" ("created_at", "email", "encrypted_password", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", Mon, 15 Jun 2015 12:39:53 UTC +00:00], ["email", "manoj.sirsath@kanakaconsulting.in"], ["encrypted_password", "$2a$10$OvK1Gz9LurkZQD6sm/V2LubpY3uWQ33i9jBbYd48DSvGC7dN6nOvm"], ["updated_at", Mon, 15 Jun 2015 12:39:53 UTC +00:00]]
+  [1m[36m (21.6ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (2.0ms)[0m  [1mUPDATE "users" SET "last_sign_in_at" = $1, "current_sign_in_at" = $2, "last_sign_in_ip" = $3, "current_sign_in_ip" = $4, "sign_in_count" = $5, "updated_at" = $6 WHERE "users"."id" = 1[0m  [["last_sign_in_at", Mon, 15 Jun 2015 12:39:53 UTC +00:00], ["current_sign_in_at", Mon, 15 Jun 2015 12:39:53 UTC +00:00], ["last_sign_in_ip", #<IPAddr: IPv4:127.0.0.1/255.255.255.255>], ["current_sign_in_ip", #<IPAddr: IPv4:127.0.0.1/255.255.255.255>], ["sign_in_count", 1], ["updated_at", Mon, 15 Jun 2015 12:39:53 UTC +00:00]]
+  [1m[35m (9.3ms)[0m  COMMIT
+Redirected to http://localhost:3000/
+Completed 302 Found in 146ms (ActiveRecord: 37.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-15 18:09:53 +0530
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/railties-4.0.0/lib/rails/templates/rails/welcome/index.html.erb (0.0ms)
+Completed 200 OK in 2ms (Views: 1.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-15 18:11:48 +0530
+
+ArgumentError (missing :action):
+  config/routes.rb:3:in `block in <top (required)>'
+  config/routes.rb:1:in `<top (required)>'
+
+
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.4ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.7ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.7ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (11.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-15 18:13:40 +0530
+
+ArgumentError (missing :action):
+  config/routes.rb:3:in `block in <top (required)>'
+  config/routes.rb:1:in `<top (required)>'
+
+
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.6ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.7ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (12.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-15 18:14:04 +0530
+
+ArgumentError (missing :action):
+  config/routes.rb:3:in `block in <top (required)>'
+  config/routes.rb:1:in `<top (required)>'
+
+
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.5ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.7ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.6ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (11.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-15 18:15:19 +0530
+
+ActionController::RoutingError (uninitialized constant UsersController):
+  activesupport (4.0.0) lib/active_support/inflector/methods.rb:226:in `const_get'
+  activesupport (4.0.0) lib/active_support/inflector/methods.rb:226:in `block in constantize'
+  activesupport (4.0.0) lib/active_support/inflector/methods.rb:224:in `each'
+  activesupport (4.0.0) lib/active_support/inflector/methods.rb:224:in `inject'
+  activesupport (4.0.0) lib/active_support/inflector/methods.rb:224:in `constantize'
+  actionpack (4.0.0) lib/action_dispatch/routing/route_set.rb:76:in `controller_reference'
+  actionpack (4.0.0) lib/action_dispatch/routing/route_set.rb:66:in `controller'
+  actionpack (4.0.0) lib/action_dispatch/routing/route_set.rb:44:in `call'
+  actionpack (4.0.0) lib/action_dispatch/journey/router.rb:71:in `block in call'
+  actionpack (4.0.0) lib/action_dispatch/journey/router.rb:59:in `each'
+  actionpack (4.0.0) lib/action_dispatch/journey/router.rb:59:in `call'
+  actionpack (4.0.0) lib/action_dispatch/routing/route_set.rb:655:in `call'
+  warden (1.2.3) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.3) lib/warden/manager.rb:34:in `catch'
+  warden (1.2.3) lib/warden/manager.rb:34:in `call'
+  rack (1.5.3) lib/rack/etag.rb:23:in `call'
+  rack (1.5.3) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.5.3) lib/rack/head.rb:11:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/flash.rb:241:in `call'
+  rack (1.5.3) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.5.3) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/cookies.rb:486:in `call'
+  activerecord (4.0.0) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.0.0) lib/active_record/connection_adapters/abstract/connection_pool.rb:626:in `call'
+  activerecord (4.0.0) lib/active_record/migration.rb:369:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.0.0) lib/active_support/callbacks.rb:373:in `_run__595838576__call__callbacks'
+  activesupport (4.0.0) lib/active_support/callbacks.rb:80:in `run_callbacks'
+  actionpack (4.0.0) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/reloader.rb:64:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/remote_ip.rb:76:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `block in call'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.3) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.3) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.0) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/static.rb:64:in `call'
+  railties (4.0.0) lib/rails/engine.rb:511:in `call'
+  railties (4.0.0) lib/rails/application.rb:97:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  rack (1.5.3) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.3) lib/rack/handler/webrick.rb:60:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.7ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.0ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.1ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (20.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-15 18:53:00 +0530
+
+ActionController::RoutingError (uninitialized constant SessionsController):
+  activesupport (4.0.0) lib/active_support/inflector/methods.rb:226:in `const_get'
+  activesupport (4.0.0) lib/active_support/inflector/methods.rb:226:in `block in constantize'
+  activesupport (4.0.0) lib/active_support/inflector/methods.rb:224:in `each'
+  activesupport (4.0.0) lib/active_support/inflector/methods.rb:224:in `inject'
+  activesupport (4.0.0) lib/active_support/inflector/methods.rb:224:in `constantize'
+  actionpack (4.0.0) lib/action_dispatch/routing/route_set.rb:76:in `controller_reference'
+  actionpack (4.0.0) lib/action_dispatch/routing/route_set.rb:66:in `controller'
+  actionpack (4.0.0) lib/action_dispatch/routing/route_set.rb:44:in `call'
+  actionpack (4.0.0) lib/action_dispatch/journey/router.rb:71:in `block in call'
+  actionpack (4.0.0) lib/action_dispatch/journey/router.rb:59:in `each'
+  actionpack (4.0.0) lib/action_dispatch/journey/router.rb:59:in `call'
+  actionpack (4.0.0) lib/action_dispatch/routing/route_set.rb:655:in `call'
+  warden (1.2.3) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.3) lib/warden/manager.rb:34:in `catch'
+  warden (1.2.3) lib/warden/manager.rb:34:in `call'
+  rack (1.5.3) lib/rack/etag.rb:23:in `call'
+  rack (1.5.3) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.5.3) lib/rack/head.rb:11:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/flash.rb:241:in `call'
+  rack (1.5.3) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.5.3) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/cookies.rb:486:in `call'
+  activerecord (4.0.0) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.0.0) lib/active_record/connection_adapters/abstract/connection_pool.rb:626:in `call'
+  activerecord (4.0.0) lib/active_record/migration.rb:369:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.0.0) lib/active_support/callbacks.rb:373:in `_run__595838576__call__callbacks'
+  activesupport (4.0.0) lib/active_support/callbacks.rb:80:in `run_callbacks'
+  actionpack (4.0.0) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/reloader.rb:64:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/remote_ip.rb:76:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `block in call'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.3) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.3) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.0) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/static.rb:64:in `call'
+  railties (4.0.0) lib/rails/engine.rb:511:in `call'
+  railties (4.0.0) lib/rails/application.rb:97:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  rack (1.5.3) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.3) lib/rack/handler/webrick.rb:60:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.7ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.1ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.7ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (20.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-15 18:53:01 +0530
+
+ActionController::RoutingError (uninitialized constant SessionsController):
+  activesupport (4.0.0) lib/active_support/inflector/methods.rb:226:in `const_get'
+  activesupport (4.0.0) lib/active_support/inflector/methods.rb:226:in `block in constantize'
+  activesupport (4.0.0) lib/active_support/inflector/methods.rb:224:in `each'
+  activesupport (4.0.0) lib/active_support/inflector/methods.rb:224:in `inject'
+  activesupport (4.0.0) lib/active_support/inflector/methods.rb:224:in `constantize'
+  actionpack (4.0.0) lib/action_dispatch/routing/route_set.rb:76:in `controller_reference'
+  actionpack (4.0.0) lib/action_dispatch/routing/route_set.rb:66:in `controller'
+  actionpack (4.0.0) lib/action_dispatch/routing/route_set.rb:44:in `call'
+  actionpack (4.0.0) lib/action_dispatch/journey/router.rb:71:in `block in call'
+  actionpack (4.0.0) lib/action_dispatch/journey/router.rb:59:in `each'
+  actionpack (4.0.0) lib/action_dispatch/journey/router.rb:59:in `call'
+  actionpack (4.0.0) lib/action_dispatch/routing/route_set.rb:655:in `call'
+  warden (1.2.3) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.3) lib/warden/manager.rb:34:in `catch'
+  warden (1.2.3) lib/warden/manager.rb:34:in `call'
+  rack (1.5.3) lib/rack/etag.rb:23:in `call'
+  rack (1.5.3) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.5.3) lib/rack/head.rb:11:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/flash.rb:241:in `call'
+  rack (1.5.3) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.5.3) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/cookies.rb:486:in `call'
+  activerecord (4.0.0) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.0.0) lib/active_record/connection_adapters/abstract/connection_pool.rb:626:in `call'
+  activerecord (4.0.0) lib/active_record/migration.rb:369:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.0.0) lib/active_support/callbacks.rb:373:in `_run__595838576__call__callbacks'
+  activesupport (4.0.0) lib/active_support/callbacks.rb:80:in `run_callbacks'
+  actionpack (4.0.0) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/reloader.rb:64:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/remote_ip.rb:76:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `block in call'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.3) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.3) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.0) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/static.rb:64:in `call'
+  railties (4.0.0) lib/rails/engine.rb:511:in `call'
+  railties (4.0.0) lib/rails/application.rb:97:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  rack (1.5.3) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.3) lib/rack/handler/webrick.rb:60:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.8ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.0ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.7ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (20.7ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-15 18:54:39 +0530
+Processing by Devise::SessionsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1[0m
+Redirected to http://localhost:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 49ms (ActiveRecord: 1.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-15 18:54:39 +0530
+
+ActionController::RoutingError (uninitialized constant SessionsController):
+  activesupport (4.0.0) lib/active_support/inflector/methods.rb:226:in `const_get'
+  activesupport (4.0.0) lib/active_support/inflector/methods.rb:226:in `block in constantize'
+  activesupport (4.0.0) lib/active_support/inflector/methods.rb:224:in `each'
+  activesupport (4.0.0) lib/active_support/inflector/methods.rb:224:in `inject'
+  activesupport (4.0.0) lib/active_support/inflector/methods.rb:224:in `constantize'
+  actionpack (4.0.0) lib/action_dispatch/routing/route_set.rb:76:in `controller_reference'
+  actionpack (4.0.0) lib/action_dispatch/routing/route_set.rb:66:in `controller'
+  actionpack (4.0.0) lib/action_dispatch/routing/route_set.rb:44:in `call'
+  actionpack (4.0.0) lib/action_dispatch/journey/router.rb:71:in `block in call'
+  actionpack (4.0.0) lib/action_dispatch/journey/router.rb:59:in `each'
+  actionpack (4.0.0) lib/action_dispatch/journey/router.rb:59:in `call'
+  actionpack (4.0.0) lib/action_dispatch/routing/route_set.rb:655:in `call'
+  warden (1.2.3) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.3) lib/warden/manager.rb:34:in `catch'
+  warden (1.2.3) lib/warden/manager.rb:34:in `call'
+  rack (1.5.3) lib/rack/etag.rb:23:in `call'
+  rack (1.5.3) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.5.3) lib/rack/head.rb:11:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/flash.rb:241:in `call'
+  rack (1.5.3) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.5.3) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/cookies.rb:486:in `call'
+  activerecord (4.0.0) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.0.0) lib/active_record/connection_adapters/abstract/connection_pool.rb:626:in `call'
+  activerecord (4.0.0) lib/active_record/migration.rb:369:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.0.0) lib/active_support/callbacks.rb:373:in `_run__595838576__call__callbacks'
+  activesupport (4.0.0) lib/active_support/callbacks.rb:80:in `run_callbacks'
+  actionpack (4.0.0) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/reloader.rb:64:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/remote_ip.rb:76:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `block in call'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.3) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.3) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.0) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/static.rb:64:in `call'
+  railties (4.0.0) lib/rails/engine.rb:511:in `call'
+  railties (4.0.0) lib/rails/application.rb:97:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  rack (1.5.3) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.3) lib/rack/handler/webrick.rb:60:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.8ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.0ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.8ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (20.9ms)
+
+
+Started GET "/login_in" for 127.0.0.1 at 2015-06-15 18:54:52 +0530
+
+ActionController::RoutingError (No route matches [GET] "/login_in"):
+  actionpack (4.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `block in call'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.3) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.3) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.0) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/static.rb:64:in `call'
+  railties (4.0.0) lib/rails/engine.rb:511:in `call'
+  railties (4.0.0) lib/rails/application.rb:97:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  rack (1.5.3) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.3) lib/rack/handler/webrick.rb:60:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.7ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.0ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.7ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (15.2ms)
+
+
+Started GET "/login_in" for 127.0.0.1 at 2015-06-15 18:55:08 +0530
+
+ActionController::RoutingError (No route matches [GET] "/login_in"):
+  actionpack (4.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `block in call'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.3) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.3) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.0) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/static.rb:64:in `call'
+  railties (4.0.0) lib/rails/engine.rb:511:in `call'
+  railties (4.0.0) lib/rails/application.rb:97:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  rack (1.5.3) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.3) lib/rack/handler/webrick.rb:60:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.7ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.0ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.8ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (14.6ms)
+
+
+Started GET "/sign_in" for 127.0.0.1 at 2015-06-15 18:55:17 +0530
+
+ActionController::RoutingError (No route matches [GET] "/sign_in"):
+  actionpack (4.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `block in call'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.3) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.3) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.0) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/static.rb:64:in `call'
+  railties (4.0.0) lib/rails/engine.rb:511:in `call'
+  railties (4.0.0) lib/rails/application.rb:97:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  rack (1.5.3) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.3) lib/rack/handler/webrick.rb:60:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.9ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.0ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.7ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (15.7ms)
+
+
+Started GET "/sign_in" for 127.0.0.1 at 2015-06-15 18:55:46 +0530
+
+ArgumentError (Invalid route name, already in use: 'new_user_session' 
+You may have defined two routes with the same name using the `:as` option, or you may be overriding a route already defined by a resource with the same naming. For the latter, you can restrict the routes created with `resources` as explained here: 
+http://guides.rubyonrails.org/routing.html#restricting-the-routes-created):
+  config/routes.rb:6:in `block (2 levels) in <top (required)>'
+  config/routes.rb:5:in `block in <top (required)>'
+  config/routes.rb:1:in `<top (required)>'
+
+
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.4ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.7ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.6ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (11.3ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2015-06-15 18:56:00 +0530
+
+ActionController::RoutingError (No route matches [GET] "/users"):
+  actionpack (4.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `block in call'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.3) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.3) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.0) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/static.rb:64:in `call'
+  railties (4.0.0) lib/rails/engine.rb:511:in `call'
+  railties (4.0.0) lib/rails/application.rb:97:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  rack (1.5.3) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.3) lib/rack/handler/webrick.rb:60:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.9ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.1ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.7ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (15.8ms)
+
+
+Started GET "/users/login" for 127.0.0.1 at 2015-06-15 18:57:09 +0530
+
+ArgumentError (Invalid route name, already in use: 'new_user_session' 
+You may have defined two routes with the same name using the `:as` option, or you may be overriding a route already defined by a resource with the same naming. For the latter, you can restrict the routes created with `resources` as explained here: 
+http://guides.rubyonrails.org/routing.html#restricting-the-routes-created):
+  config/routes.rb:6:in `block (2 levels) in <top (required)>'
+  config/routes.rb:5:in `block in <top (required)>'
+  config/routes.rb:1:in `<top (required)>'
+
+
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.4ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.8ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.6ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (11.1ms)
+
+
+Started GET "/users/login" for 127.0.0.1 at 2015-06-15 18:57:32 +0530
+
+ArgumentError (Invalid route name, already in use: 'new_user_session' 
+You may have defined two routes with the same name using the `:as` option, or you may be overriding a route already defined by a resource with the same naming. For the latter, you can restrict the routes created with `resources` as explained here: 
+http://guides.rubyonrails.org/routing.html#restricting-the-routes-created):
+  config/routes.rb:12:in `block in <top (required)>'
+  config/routes.rb:1:in `<top (required)>'
+
+
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.4ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.8ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.6ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (11.3ms)
+
+
+Started GET "/session/login" for 127.0.0.1 at 2015-06-15 18:57:42 +0530
+
+ActionController::RoutingError (No route matches [GET] "/session/login"):
+  actionpack (4.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `block in call'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.3) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.3) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.0) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/static.rb:64:in `call'
+  railties (4.0.0) lib/rails/engine.rb:511:in `call'
+  railties (4.0.0) lib/rails/application.rb:97:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  rack (1.5.3) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.3) lib/rack/handler/webrick.rb:60:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.0ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.7ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (15.8ms)
+
+
+Started GET "/sessions/login" for 127.0.0.1 at 2015-06-15 18:57:46 +0530
+
+ActionController::RoutingError (No route matches [GET] "/sessions/login"):
+  actionpack (4.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `block in call'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.3) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.3) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.0) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/static.rb:64:in `call'
+  railties (4.0.0) lib/rails/engine.rb:511:in `call'
+  railties (4.0.0) lib/rails/application.rb:97:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  rack (1.5.3) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.3) lib/rack/handler/webrick.rb:60:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.8ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.0ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.7ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (15.7ms)
+
+
+Started GET "/users/login" for 127.0.0.1 at 2015-06-15 18:57:54 +0530
+
+ActionController::RoutingError (No route matches [GET] "/users/login"):
+  actionpack (4.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `block in call'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.3) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.3) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.0) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/static.rb:64:in `call'
+  railties (4.0.0) lib/rails/engine.rb:511:in `call'
+  railties (4.0.0) lib/rails/application.rb:97:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  rack (1.5.3) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.3) lib/rack/handler/webrick.rb:60:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.9ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.1ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.7ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (15.3ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-15 18:58:02 +0530
+Processing by Devise::SessionsController#new as HTML
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://localhost:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 25ms (ActiveRecord: 1.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-15 18:58:02 +0530
+
+ActionController::RoutingError (No route matches [GET] "/"):
+  actionpack (4.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `block in call'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.3) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.3) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.0) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/static.rb:64:in `call'
+  railties (4.0.0) lib/rails/engine.rb:511:in `call'
+  railties (4.0.0) lib/rails/application.rb:97:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  rack (1.5.3) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.3) lib/rack/handler/webrick.rb:60:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.3ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.0ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.7ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (35.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-15 18:58:05 +0530
+
+ActionController::RoutingError (No route matches [GET] "/"):
+  actionpack (4.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `block in call'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.3) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.3) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.0) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/static.rb:64:in `call'
+  railties (4.0.0) lib/rails/engine.rb:511:in `call'
+  railties (4.0.0) lib/rails/application.rb:97:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  rack (1.5.3) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.3) lib/rack/handler/webrick.rb:60:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.8ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.1ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.7ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (15.8ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-15 19:05:00 +0530
+Processing by Devise::SessionsController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1[0m
+Redirected to http://localhost:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 23ms (ActiveRecord: 1.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-15 19:05:00 +0530
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/railties-4.0.0/lib/rails/templates/rails/welcome/index.html.erb (0.0ms)
+Completed 200 OK in 1ms (Views: 1.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-15 19:05:06 +0530
+Processing by Devise::SessionsController#new as HTML
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://localhost:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 2ms (ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-15 19:05:06 +0530
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/railties-4.0.0/lib/rails/templates/rails/welcome/index.html.erb (0.0ms)
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-15 19:06:11 +0530
+Processing by Devise::SessionsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1[0m
+Redirected to http://localhost:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 45ms (ActiveRecord: 1.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-15 19:06:11 +0530
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/railties-4.0.0/lib/rails/templates/rails/welcome/index.html.erb (0.0ms)
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-15 19:06:34 +0530
+
+ArgumentError (Invalid route name, already in use: 'new_user_session' 
+You may have defined two routes with the same name using the `:as` option, or you may be overriding a route already defined by a resource with the same naming. For the latter, you can restrict the routes created with `resources` as explained here: 
+http://guides.rubyonrails.org/routing.html#restricting-the-routes-created):
+  config/routes.rb:12:in `block in <top (required)>'
+  config/routes.rb:1:in `<top (required)>'
+
+
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.4ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.8ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.6ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (11.2ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-15 19:07:00 +0530
+
+ArgumentError (Invalid route name, already in use: 'new_user_session' 
+You may have defined two routes with the same name using the `:as` option, or you may be overriding a route already defined by a resource with the same naming. For the latter, you can restrict the routes created with `resources` as explained here: 
+http://guides.rubyonrails.org/routing.html#restricting-the-routes-created):
+  config/routes.rb:11:in `block in <top (required)>'
+  config/routes.rb:1:in `<top (required)>'
+
+
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.4ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.9ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.6ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (11.7ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-15 19:07:01 +0530
+Processing by Devise::SessionsController#new as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://localhost:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 23ms (ActiveRecord: 1.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-15 19:07:01 +0530
+
+ActionController::RoutingError (No route matches [GET] "/"):
+  actionpack (4.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `block in call'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.3) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.3) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.0) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/static.rb:64:in `call'
+  railties (4.0.0) lib/rails/engine.rb:511:in `call'
+  railties (4.0.0) lib/rails/application.rb:97:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  rack (1.5.3) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.3) lib/rack/handler/webrick.rb:60:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.6ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.0ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.7ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (14.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-15 19:07:02 +0530
+
+ActionController::RoutingError (No route matches [GET] "/"):
+  actionpack (4.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `block in call'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.3) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.3) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.0) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/static.rb:64:in `call'
+  railties (4.0.0) lib/rails/engine.rb:511:in `call'
+  railties (4.0.0) lib/rails/application.rb:97:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  rack (1.5.3) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.3) lib/rack/handler/webrick.rb:60:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.7ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.1ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.7ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (14.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-15 19:07:02 +0530
+
+ActionController::RoutingError (No route matches [GET] "/"):
+  actionpack (4.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `block in call'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.3) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.3) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.0) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/static.rb:64:in `call'
+  railties (4.0.0) lib/rails/engine.rb:511:in `call'
+  railties (4.0.0) lib/rails/application.rb:97:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  rack (1.5.3) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.3) lib/rack/handler/webrick.rb:60:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.7ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.2ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.7ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (36.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-15 19:07:02 +0530
+
+ActionController::RoutingError (No route matches [GET] "/"):
+  actionpack (4.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `block in call'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.3) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.3) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.0) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/static.rb:64:in `call'
+  railties (4.0.0) lib/rails/engine.rb:511:in `call'
+  railties (4.0.0) lib/rails/application.rb:97:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  rack (1.5.3) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.3) lib/rack/handler/webrick.rb:60:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.9ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.0ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.7ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (15.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-15 19:07:02 +0530
+
+ActionController::RoutingError (No route matches [GET] "/"):
+  actionpack (4.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `block in call'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `block in tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:25:in `tagged'
+  activesupport (4.0.0) lib/active_support/tagged_logging.rb:67:in `tagged'
+  railties (4.0.0) lib/rails/rack/logger.rb:21:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.3) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.3) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.0) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.0) lib/action_dispatch/middleware/static.rb:64:in `call'
+  railties (4.0.0) lib/rails/engine.rb:511:in `call'
+  railties (4.0.0) lib/rails/application.rb:97:in `call'
+  rack (1.5.3) lib/rack/lock.rb:17:in `call'
+  rack (1.5.3) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.3) lib/rack/handler/webrick.rb:60:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /home/ubuntu/.rvm/rubies/ruby-2.0.0-p645/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.7ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.0ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.8ms)
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (14.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-15 19:07:14 +0530
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/railties-4.0.0/lib/rails/templates/rails/welcome/index.html.erb (0.0ms)
+Completed 200 OK in 2ms (Views: 1.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-15 19:07:15 +0530
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/railties-4.0.0/lib/rails/templates/rails/welcome/index.html.erb (0.0ms)
+Completed 200 OK in 1ms (Views: 1.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-15 19:07:28 +0530
+Processing by Devise::SessionsController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1[0m
+Redirected to http://localhost:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 24ms (ActiveRecord: 1.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-15 19:07:28 +0530
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/railties-4.0.0/lib/rails/templates/rails/welcome/index.html.erb (0.0ms)
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-15 19:07:31 +0530
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/railties-4.0.0/lib/rails/templates/rails/welcome/index.html.erb (0.0ms)
+Completed 200 OK in 1ms (Views: 1.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/rails/info/properties" for 127.0.0.1 at 2015-06-15 19:07:39 +0530
+Processing by Rails::InfoController#properties as HTML
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/railties-4.0.0/lib/rails/templates/rails/info/properties.html.erb (0.3ms)
+Completed 200 OK in 14ms (Views: 10.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/sign_in" for 127.0.0.1 at 2015-06-15 19:08:02 +0530
+Processing by Devise::SessionsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1[0m
+Redirected to http://localhost:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-15 19:08:02 +0530
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/railties-4.0.0/lib/rails/templates/rails/welcome/index.html.erb (0.0ms)
+Completed 200 OK in 2ms (Views: 1.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-15 19:09:38 +0530
+Processing by Devise::SessionsController#new as HTML
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Redirected to http://localhost:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 25ms (ActiveRecord: 1.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-15 19:09:38 +0530
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/railties-4.0.0/lib/rails/templates/rails/welcome/index.html.erb (0.0ms)
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.0ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateEmployees (20150615135509)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (54.8ms)[0m  [1mCREATE TABLE "employees" ("id" serial primary key, "first_name" character varying(255), "last_name" character varying(255), "salary" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150615135509"]]
+  [1m[36m (16.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateStudents (20150615142324)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (65.2ms)[0m  [1mCREATE TABLE "students" ("id" serial primary key, "first_name" character varying(255), "last_name" character varying(255), "mark" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150615142324"]]
+  [1m[36m (19.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.5ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (4.0ms)[0m  INSERT INTO "students" ("created_at", "first_name", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", Tue, 16 Jun 2015 05:46:13 UTC +00:00], ["first_name", "manoj"], ["updated_at", Tue, 16 Jun 2015 05:46:13 UTC +00:00]]
+  [1m[36m (15.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mUPDATE "students" SET "last_name" = $1, "mark" = $2, "updated_at" = $3 WHERE "students"."id" = 1[0m  [["last_name", "sirsath"], ["mark", 570], ["updated_at", Tue, 16 Jun 2015 05:47:30 UTC +00:00]]
+  [1m[35m (20.9ms)[0m  COMMIT
+  [1m[36mStudent Load (1.3ms)[0m  [1mSELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT 1[0m  [["id", 1]]
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-16 12:34:41 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /home/ubuntu/.rvm/gems/ruby-2.0.0-p645@Ruby_V2.0.0/gems/railties-4.0.0/lib/rails/templates/rails/welcome/index.html.erb (1.1ms)
+Completed 200 OK in 13ms (Views: 4.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2015-06-16 12:34:49 +0530
+Processing by StudentsController#index as HTML
+  [1m[35mStudent Load (0.5ms)[0m  SELECT "students".* FROM "students"
+  Rendered students/index.html.erb within layouts/application (16.4ms)
+Completed 200 OK in 121ms (Views: 116.5ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2015-06-16 12:34:49 +0530
+
+
+Started GET "/assets/students.js?body=1" for 127.0.0.1 at 2015-06-16 12:34:49 +0530
+
+
+Started GET "/assets/students.css?body=1" for 127.0.0.1 at 2015-06-16 12:34:49 +0530
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-06-16 12:34:49 +0530
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-06-16 12:34:49 +0530
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-06-16 12:34:49 +0530
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-06-16 12:34:49 +0530
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-06-16 12:34:49 +0530
+
+
+Started GET "/students/new" for 127.0.0.1 at 2015-06-16 12:34:55 +0530
+Processing by StudentsController#new as HTML
+  Rendered students/_form.html.erb (195.4ms)
+  Rendered students/new.html.erb within layouts/application (198.9ms)
+Completed 200 OK in 204ms (Views: 202.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/students" for 127.0.0.1 at 2015-06-16 12:35:16 +0530
+Processing by StudentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ur1XxWOdifnFNcBc0YQAkCkXDwuGq2EbCIOAV+i9O0Y=", "student"=>{"first_name"=>"Madan", "last_name"=>"M", "mark"=>"61"}, "commit"=>"Create Student"}
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (3.1ms)[0m  INSERT INTO "students" ("created_at", "first_name", "last_name", "mark", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", Tue, 16 Jun 2015 07:05:16 UTC +00:00], ["first_name", "Madan"], ["last_name", "M"], ["mark", 61], ["updated_at", Tue, 16 Jun 2015 07:05:16 UTC +00:00]]
+  [1m[36m (50.0ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/students/2
+Completed 302 Found in 59ms (ActiveRecord: 53.7ms)
+
+
+Started GET "/students/2" for 127.0.0.1 at 2015-06-16 12:35:16 +0530
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mStudent Load (0.6ms)[0m  SELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT 1  [["id", "2"]]
+  Rendered students/show.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 8ms (Views: 5.0ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-06-16 12:35:16 +0530
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-06-16 12:35:16 +0530
+
+
+Started GET "/assets/students.css?body=1" for 127.0.0.1 at 2015-06-16 12:35:16 +0530
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-06-16 12:35:16 +0530
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-06-16 12:35:16 +0530
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-06-16 12:35:16 +0530
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2015-06-16 12:35:16 +0530
+
+
+Started GET "/assets/students.js?body=1" for 127.0.0.1 at 2015-06-16 12:35:16 +0530
+
+
+Started GET "/students" for 127.0.0.1 at 2015-06-16 12:35:18 +0530
+Processing by StudentsController#index as HTML
+  [1m[36mStudent Load (0.3ms)[0m  [1mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 5ms (Views: 4.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/students/new" for 127.0.0.1 at 2015-06-16 15:27:14 +0530
+Processing by StudentsController#new as HTML
+  Rendered students/_form.html.erb (1.9ms)
+  Rendered students/new.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 6ms (Views: 5.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2015-06-16 15:27:17 +0530
+Processing by StudentsController#index as HTML
+  [1m[35mStudent Load (0.3ms)[0m  SELECT "students".* FROM "students"
+  Rendered students/index.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 4ms (Views: 3.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/students/1/edit" for 127.0.0.1 at 2015-06-16 15:27:22 +0530
+Processing by StudentsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mStudent Load (0.3ms)[0m  [1mSELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT 1[0m  [["id", "1"]]
+  Rendered students/_form.html.erb (2.5ms)
+  Rendered students/edit.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 8ms (Views: 6.6ms | ActiveRecord: 0.3ms)
+
+
+Started PATCH "/students/1" for 127.0.0.1 at 2015-06-16 15:27:25 +0530
+Processing by StudentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ur1XxWOdifnFNcBc0YQAkCkXDwuGq2EbCIOAV+i9O0Y=", "student"=>{"first_name"=>"manoj", "last_name"=>"sirsath", "mark"=>"570"}, "commit"=>"Update Student", "id"=>"1"}
+  [1m[35mStudent Load (0.4ms)[0m  SELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT 1  [["id", "1"]]
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+Redirected to http://localhost:3000/students/1
+Completed 302 Found in 5ms (ActiveRecord: 0.8ms)
+
+
+Started GET "/students/1" for 127.0.0.1 at 2015-06-16 15:27:25 +0530
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mStudent Load (0.3ms)[0m  [1mSELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT 1[0m  [["id", "1"]]
+  Rendered students/show.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 5ms (Views: 3.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2015-06-16 15:27:25 +0530
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-06-16 15:27:25 +0530
+
+
+Started GET "/assets/students.js?body=1" for 127.0.0.1 at 2015-06-16 15:27:25 +0530
+
+
+Started GET "/assets/students.css?body=1" for 127.0.0.1 at 2015-06-16 15:27:25 +0530
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-06-16 15:27:25 +0530
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-06-16 15:27:25 +0530
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-06-16 15:27:25 +0530
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-06-16 15:27:25 +0530
+
+
+Started GET "/students" for 127.0.0.1 at 2015-06-16 15:27:26 +0530
+Processing by StudentsController#index as HTML
+  [1m[35mStudent Load (0.3ms)[0m  SELECT "students".* FROM "students"
+  Rendered students/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 4ms (Views: 3.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/students/2/edit" for 127.0.0.1 at 2015-06-16 15:27:28 +0530
+Processing by StudentsController#edit as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mStudent Load (0.3ms)[0m  [1mSELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT 1[0m  [["id", "2"]]
+  Rendered students/_form.html.erb (1.9ms)
+  Rendered students/edit.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 7ms (Views: 5.5ms | ActiveRecord: 0.3ms)
+
+
+Started PATCH "/students/2" for 127.0.0.1 at 2015-06-16 15:27:33 +0530
+Processing by StudentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ur1XxWOdifnFNcBc0YQAkCkXDwuGq2EbCIOAV+i9O0Y=", "student"=>{"first_name"=>"Madan", "last_name"=>"M", "mark"=>"610"}, "commit"=>"Update Student", "id"=>"2"}
+  [1m[35mStudent Load (0.4ms)[0m  SELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT 1  [["id", "2"]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  UPDATE "students" SET "mark" = $1, "updated_at" = $2 WHERE "students"."id" = 2  [["mark", 610], ["updated_at", Tue, 16 Jun 2015 09:57:33 UTC +00:00]]
+  [1m[36m (18.6ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/students/2
+Completed 302 Found in 25ms (ActiveRecord: 19.6ms)
+
+
+Started GET "/students/2" for 127.0.0.1 at 2015-06-16 15:27:33 +0530
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mStudent Load (0.3ms)[0m  SELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT 1  [["id", "2"]]
+  Rendered students/show.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 6ms (Views: 4.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-06-16 15:27:33 +0530
+
+
+Started GET "/assets/students.css?body=1" for 127.0.0.1 at 2015-06-16 15:27:33 +0530
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2015-06-16 15:27:33 +0530
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-06-16 15:27:33 +0530
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-06-16 15:27:33 +0530
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-06-16 15:27:33 +0530
+
+
+Started GET "/assets/students.js?body=1" for 127.0.0.1 at 2015-06-16 15:27:33 +0530
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-06-16 15:27:33 +0530
+
+
+Started GET "/students" for 127.0.0.1 at 2015-06-16 15:27:36 +0530
+Processing by StudentsController#index as HTML
+  [1m[36mStudent Load (0.3ms)[0m  [1mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 5ms (Views: 4.0ms | ActiveRecord: 0.3ms)
+
+
+Started DELETE "/students/2" for 127.0.0.1 at 2015-06-16 15:27:46 +0530
+Processing by StudentsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"ur1XxWOdifnFNcBc0YQAkCkXDwuGq2EbCIOAV+i9O0Y=", "id"=>"2"}
+  [1m[35mStudent Load (0.5ms)[0m  SELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT 1  [["id", "2"]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  DELETE FROM "students" WHERE "students"."id" = $1  [["id", 2]]
+  [1m[36m (18.8ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/students
+Completed 302 Found in 24ms (ActiveRecord: 19.9ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2015-06-16 15:27:46 +0530
+Processing by StudentsController#index as HTML
+  [1m[35mStudent Load (0.3ms)[0m  SELECT "students".* FROM "students"
+  Rendered students/index.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 5ms (Views: 3.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-06-16 15:27:46 +0530
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2015-06-16 15:27:46 +0530
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-06-16 15:27:46 +0530
+
+
+Started GET "/assets/students.js?body=1" for 127.0.0.1 at 2015-06-16 15:27:46 +0530
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-06-16 15:27:46 +0530
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-06-16 15:27:46 +0530
+
+
+Started GET "/assets/students.css?body=1" for 127.0.0.1 at 2015-06-16 15:27:46 +0530
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-06-16 15:27:46 +0530
+
+
+Started GET "/students/new" for 127.0.0.1 at 2015-06-16 15:27:48 +0530
+Processing by StudentsController#new as HTML
+  Rendered students/_form.html.erb (1.9ms)
+  Rendered students/new.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 6ms (Views: 5.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/students" for 127.0.0.1 at 2015-06-16 15:28:02 +0530
+Processing by StudentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ur1XxWOdifnFNcBc0YQAkCkXDwuGq2EbCIOAV+i9O0Y=", "student"=>{"first_name"=>"Madan", "last_name"=>"M", "mark"=>"610"}, "commit"=>"Create Student"}
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "students" ("created_at", "first_name", "last_name", "mark", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", Tue, 16 Jun 2015 09:58:02 UTC +00:00], ["first_name", "Madan"], ["last_name", "M"], ["mark", 610], ["updated_at", Tue, 16 Jun 2015 09:58:02 UTC +00:00]]
+  [1m[36m (19.7ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/students/3
+Completed 302 Found in 24ms (ActiveRecord: 20.3ms)
+
+
+Started GET "/students/3" for 127.0.0.1 at 2015-06-16 15:28:02 +0530
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[35mStudent Load (0.2ms)[0m  SELECT "students".* FROM "students" WHERE "students"."id" = $1 LIMIT 1  [["id", "3"]]
+  Rendered students/show.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 4ms (Views: 3.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-06-16 15:28:02 +0530
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2015-06-16 15:28:02 +0530
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-06-16 15:28:02 +0530
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-06-16 15:28:02 +0530
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-06-16 15:28:02 +0530
+
+
+Started GET "/assets/students.css?body=1" for 127.0.0.1 at 2015-06-16 15:28:02 +0530
+
+
+Started GET "/assets/students.js?body=1" for 127.0.0.1 at 2015-06-16 15:28:02 +0530
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-06-16 15:28:02 +0530
+
+
+Started GET "/students" for 127.0.0.1 at 2015-06-16 15:28:03 +0530
+Processing by StudentsController#index as HTML
+  [1m[36mStudent Load (0.3ms)[0m  [1mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 5ms (Views: 3.8ms | ActiveRecord: 0.3ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateContacts (20150616121518)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (95.7ms)[0m  [1mCREATE TABLE "contacts" ("id" serial primary key, "first_name" character varying(255), "last_name" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150616121518"]]
+  [1m[36m (21.6ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.5ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
